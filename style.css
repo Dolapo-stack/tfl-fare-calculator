@@ -1,0 +1,52 @@
+.travel_result {
+  border: 1px solid black;
+  padding: 15px 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.to_fro_display {
+  border: 1px solid black;
+}
+
+.journey_details_list {
+  display: flex;
+  list-style: none;
+  padding: 0px 12px 0px;
+  gap: 10px;
+}
+
+.fare_display {
+  border: 1px solid black;
+  padding: 0px 12px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.duration {
+  border: 1px solid black;
+  padding: 0px 12px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+.journey_container {
+  border: 1px solid black;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.journey {
+  border: 1px solid black;
+  padding: 15px 20px;
+  display: flex;
+
+  gap: 20px;
+  list-style: none;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/ca9eed9379.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <label for=""> Start </label>
+    <input
+      type="text"
+      name=""
+      id="departure"
+      placeholder="Enter departure station"
+    />
+
+    <!-- </label> -->
+    <br />
+    <button onclick="toggleStations()">
+      <i class="fa-solid fa-arrows-up-down"></i>
+    </button>
+    <br />
+    <label for=""> End </label>
+    <input
+      type="text"
+      name=""
+      id="destination"
+      placeholder="Enter destination station"
+    />
+    <!-- </label> -->
+    <br />
+    <br />
+    <button onclick="calculateBtn()">Submit</button>
+    <!-- <input type="button" value="" id="calculateBtn" /> -->
+
+    <div class="travel_result">
+      <div class="to_fro_display">
+        <ul class="journey_details_list">
+          <li id="departing_station"></li>
+          <li><i class="fa-solid fa-arrow-right"></i></li>
+          <li id="arriving_station"></li>
+        </ul>
+      </div>
+      <div class="fare_display">£3.90</div>
+      <div class="duration">15</div>
+    </div>
+
+    <div class="journey_container hide"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
