@@ -61,9 +61,13 @@ const calculateBtn = async () => {
   //   fareResult.textContent += " 3.90";
 };
 
-// const toggleStations = () =>{
+const toggleStations = () => {
+  let departureInputValue = departureInput.value;
+  let destinationInputValue = destinationInput.value;
 
-// }
+  departureInput.value = destinationInputValue;
+  destinationInput.value = departureInputValue;
+};
 
 travelResult.addEventListener("click", (e) => {
   journeyContainer.classList.remove("hide");

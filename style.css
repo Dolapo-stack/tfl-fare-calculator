@@ -1,8 +1,72 @@
-.travel_result {
-  border: 1px solid black;
+body {
+  background-color: bisque;
+}
+
+.container {
+  margin: auto;
+  width: 40%;
+  border: 2px solid black;
   padding: 15px 20px;
+}
+
+.start,
+.end {
+  border: 1px solid black;
+  padding: 10px 10px;
+}
+
+label {
+  font-size: large;
+  font-weight: 600;
+}
+
+input {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  color: gray;
+  font-size: 14px;
+  width: 70%;
+  margin-left: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#submit_btn {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: black;
+  color: antiquewhite;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  min-height: 30px;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+#submit_btn:hover {
+  background-color: rgb(78, 74, 74);
+}
+
+#toggle_button {
+  float: right;
+  background-color: black;
+  color: antiquewhite;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.travel_result {
+  border: 2px solid black;
+  padding: 15px 12px;
   display: flex;
   gap: 20px;
+  margin-top: 15px;
+  justify-content: center;
+  max-width: 100%;
 }
 
 .to_fro_display {
@@ -35,11 +99,12 @@
 }
 
 .journey_container {
-  border: 1px solid black;
-  padding: 15px 20px;
+  border: 2px solid black;
+  padding: 15px 12px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-top: 15px;
 }
 
 .journey {

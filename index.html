@@ -12,32 +12,33 @@
     ></script>
   </head>
   <body>
-    <label for=""> Start </label>
-    <input
-      type="text"
-      name=""
-      id="departure"
-      placeholder="Enter departure station"
-    />
+    <div class="container">
+      <div class="start">
+        <label for=""> Start </label>
+        <input
+          type="text"
+          name=""
+          id="departure"
+          placeholder="Enter departure station"
+        />
+      </div>
 
-    <!-- </label> -->
-    <br />
-    <button onclick="toggleStations()">
-      <i class="fa-solid fa-arrows-up-down"></i>
-    </button>
-    <br />
-    <label for=""> End </label>
-    <input
-      type="text"
-      name=""
-      id="destination"
-      placeholder="Enter destination station"
-    />
-    <!-- </label> -->
-    <br />
-    <br />
-    <button onclick="calculateBtn()">Submit</button>
-    <!-- <input type="button" value="" id="calculateBtn" /> -->
+      <button onclick="toggleStations()" id="toggle_button">
+        <i class="fa-solid fa-arrows-up-down"></i>
+      </button>
+      <br />
+      <div class="end">
+        <label for=""> End </label>
+        <input
+          type="text"
+          name=""
+          id="destination"
+          placeholder="Enter destination station"
+        />
+      </div>
+
+      <button onclick="calculateBtn()" id="submit_btn">Submit</button>
+    </div>
 
     <div class="travel_result">
       <div class="to_fro_display">
@@ -48,7 +49,7 @@
         </ul>
       </div>
       <div class="fare_display">£3.90</div>
-      <div class="duration">15</div>
+      <div class="duration">15 mins</div>
     </div>
 
     <div class="journey_container hide"></div>
