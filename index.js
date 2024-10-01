@@ -22,11 +22,14 @@ const calculateBtn = async () => {
   journeyContainer.style.border = "2px solid black";
 
   try {
+    journeyContainer.innerHTML = "LOADING!!!";
     const response = await fetch(
       `https://api.tfl.gov.uk/Journey/JourneyResults/${departureInputValue}/to/${destinationInputValue}`
     );
     const responseBody = await response.json();
     console.log(responseBody.journeys);
+
+    journeyContainer.innerHTML = "";
 
     for (const journey of responseBody.journeys) {
       let journeys = `<div class="journey">
@@ -54,6 +57,7 @@ const calculateBtn = async () => {
           );
         }
       }
+
       journeyContainer.insertAdjacentHTML("beforeend", journeys);
     }
   } catch (err) {
