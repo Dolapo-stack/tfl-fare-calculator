@@ -18,6 +18,8 @@ const calculateBtn = async () => {
 
   departingStation.textContent = departureInputValue;
   arrivingStation.textContent = destinationInputValue;
+  travelResult.classList.remove("hide");
+  journeyContainer.style.border = "2px solid black";
 
   try {
     const response = await fetch(
@@ -28,7 +30,7 @@ const calculateBtn = async () => {
 
     for (const journey of responseBody.journeys) {
       let journeys = `<div class="journey">
-        <li class="departure_arrival_time">piok9</li>
+        <li class="departure_arrival_time"></li>
         <li class="journey_duration">${journey.duration}</li>
         <li class="platform"></li>
       </div>`;
@@ -71,4 +73,5 @@ const toggleStations = () => {
 
 travelResult.addEventListener("click", (e) => {
   journeyContainer.classList.remove("hide");
+  journeyContainer.style.border = "2px solid black";
 });

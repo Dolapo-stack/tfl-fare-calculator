@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  justify-content: center;
   background-color: bisque;
 }
 
@@ -99,7 +103,7 @@ input {
 }
 
 .journey_container {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   padding: 15px 12px;
   display: flex;
   flex-direction: column;
