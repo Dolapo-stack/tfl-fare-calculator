@@ -1,5 +1,8 @@
 const departureInput = document.getElementById("departure");
 const destinationInput = document.getElementById("destination");
+const departure_clearBtn = document.querySelector(".departure_clearBtn");
+const destination_clearBtn = document.querySelector(".destination_clearBtn");
+
 const departingStation = document.getElementById("departing_station");
 const arrivingStation = document.getElementById("arriving_station");
 
@@ -10,9 +13,31 @@ const journeyContainer = document.querySelector(".journey_container");
 
 const errorMessage = document.querySelector(".error_message");
 
-// calculateFareBtn.addEventListener("click", (e) => {
-//   fareResult.textContent += " 3.90";
-// });
+const departure_toggle_clear_button = () => {
+  if (departureInput.value.length > 0) {
+    departure_clearBtn.style.display = "block";
+  } else {
+    departure_clearBtn.style.display = "none";
+  }
+};
+
+const destination_toggle_clear_button = () => {
+  if (destinationInput.value.length > 0) {
+    destination_clearBtn.style.display = "block";
+  } else {
+    destination_clearBtn.style.display = "none";
+  }
+};
+
+const departure_clear_input = () => {
+  departureInput.value = "";
+  departure_clearBtn.style.display = "none";
+};
+
+const destination_clear_input = () => {
+  destinationInput.value = "";
+  destination_clearBtn.style.display = "none";
+};
 
 const calculateBtn = async () => {
   const departureInputValue = departureInput.value;

@@ -13,28 +13,42 @@
   </head>
   <body>
     <div class="container">
-      <div class="start">
-        <label for=""> Start </label>
+      <div class="input-container">
+        <label>Start </label>
         <input
           type="text"
           name=""
           id="departure"
           placeholder="Enter departure station"
+          oninput="departure_toggle_clear_button()"
         />
+        <span class="departure_clearBtn"
+          ><i
+            class="fa-solid fa-xmark fa-lg"
+            onclick="departure_clear_input()"
+          ></i
+        ></span>
       </div>
 
       <button onclick="toggleStations()" id="toggle_button">
         <i class="fa-solid fa-arrows-up-down"></i>
       </button>
       <br />
-      <div class="end">
-        <label for=""> End </label>
+      <div class="input-container">
+        <label>End </label>
         <input
           type="text"
           name=""
           id="destination"
           placeholder="Enter destination station"
+          oninput="destination_toggle_clear_button()"
         />
+        <span class="destination_clearBtn"
+          ><i
+            class="fa-solid fa-xmark fa-lg"
+            onclick="destination_clear_input()"
+          ></i
+        ></span>
       </div>
 
       <button onclick="calculateBtn()" id="submit_btn">Submit</button>

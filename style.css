@@ -8,15 +8,23 @@ body {
 
 .container {
   margin: auto;
-  width: 40%;
+  width: 35%;
   border: 2px solid black;
   padding: 15px 20px;
 }
 
-.start,
-.end {
+.input-container {
   border: 1px solid black;
   padding: 10px 10px;
+  position: relative;
+}
+
+.departure_clearBtn,
+.destination_clearBtn {
+  position: absolute;
+  top: 36%;
+  right: 100px;
+  display: none;
 }
 
 label {
@@ -25,15 +33,15 @@ label {
 }
 
 input {
-  border: none;
+  /* border: none; */
   outline: none;
   background-color: inherit;
   color: gray;
-  font-size: 14px;
-  width: 70%;
+  font-size: 16px;
+  width: 300px;
   margin-left: 10px;
-  padding: 5px;
-  cursor: pointer;
+  padding: 10px 40px 10px 10px;
+  border-radius: 5px;
 }
 
 #submit_btn {
