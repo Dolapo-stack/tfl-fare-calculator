@@ -13,6 +13,29 @@ const journeyContainer = document.querySelector(".journey_container");
 
 const errorMessage = document.querySelector(".error_message");
 
+const departure_user_query = async () => {
+  const query = departureInput.value;
+  const queryParams = {
+    modes: ["overground", "elizabeth-line", "tube", "national-rail"],
+  };
+
+  // Convert the array to a comma-separated string
+  const params = new URLSearchParams({
+    modes: queryParams.modes.join(","),
+  });
+  try {
+    const response = await fetch(
+      `https://api.tfl.gov.uk/StopPoint/Search/${query} ? ${params.toString()}`
+    );
+    const responseBody = await response.json();
+    console.log(responseBody.matches[1].name);
+    console.log(responseBody.matches[1].modes);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const destination_user_query = () => {};
+
 const departure_toggle_clear_button = () => {
   if (departureInput.value.length > 0) {
     departure_clearBtn.style.display = "block";
@@ -59,6 +82,7 @@ const calculateBtn = async () => {
         `https://api.tfl.gov.uk/Journey/JourneyResults/${departureInputValue}/to/${destinationInputValue}`
       );
       const responseBody = await response.json();
+      console.log(responseBody);
       console.log(responseBody.journeys);
 
       journeyContainer.innerHTML = "";

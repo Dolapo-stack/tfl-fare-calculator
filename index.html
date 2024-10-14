@@ -21,6 +21,7 @@
           id="departure"
           placeholder="Enter departure station"
           oninput="departure_toggle_clear_button()"
+          onkeyup="departure_user_query()"
         />
         <span class="departure_clearBtn"
           ><i
@@ -41,6 +42,7 @@
           name=""
           id="destination"
           placeholder="Enter destination station"
+          onkeyup="destination_user_query()"
           oninput="destination_toggle_clear_button()"
         />
         <span class="destination_clearBtn"
