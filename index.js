@@ -16,9 +16,7 @@ const errorMessage = document.querySelector(".error_message");
 const departureDropdown = document.querySelector(".departure_dropdown");
 const departureListItem = document.querySelectorAll(".departure_dropdown li");
 
-const populateDepartureDropdown = (matchesArray) => {
-  const departureListItem = document.querySelectorAll(".departure_dropdown li");
-};
+const populateDepartureDropdown = (matchesArray) => {};
 
 const departure_user_query = async () => {
   departureDropdown.classList.remove("hide");
@@ -52,7 +50,44 @@ const departure_user_query = async () => {
     console.error(err);
   }
 };
-const destination_user_query = () => {};
+
+const destinationDropdown = document.querySelector(".destination_dropdown");
+const destinationDropdownLi = document.querySelectorAll(
+  ".destination_dropdown li"
+);
+
+const populateDestinationDropdown = (matchesArray) => {};
+
+const destination_user_query = async () => {
+  const query = destinationInput.value;
+  const queryParams = {
+    modes: ["overground", "elizabeth-line", "tube", "national-rail"],
+  };
+  const params = new URLSearchParams({
+    modes: queryParams.modes.join(","),
+  });
+  destinationDropdown.classList.remove("hide");
+  destinationDropdownLi.forEach((li) => {
+    li.addEventListener("click", (e) => {
+      destinationInput.value = li.innerHTML;
+      destinationDropdown.classList.add("hide");
+    });
+  });
+  try {
+    const response = await fetch(
+      `https://api.tfl.gov.uk/StopPoint/Search/${query}? ${params.toString()}`
+    );
+
+    const responseBody = await response.json();
+    console.log(responseBody.matches);
+    console.log(responseBody.matches[1].modes);
+    console.log(responseBody.matches[1].name);
+
+    populateDestinationDropdown(responseBody.matches);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const departure_toggle_clear_button = () => {
   if (departureInput.value.length > 0) {
