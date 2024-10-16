@@ -127,3 +127,26 @@ input {
   gap: 20px;
   list-style: none;
 }
+
+.departure_dropdown {
+  position: absolute;
+  top: 70px;
+  right: 138px;
+  border: 1px solid black;
+  width: 660px;
+  margin: 30px 0 0;
+  background-color: white;
+  z-index: 100;
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.departure_dropdown ul {
+  list-style: none;
+  margin: 0px;
+  padding: 20px;
+}
+
+.departure_dropdown li {
+  border-bottom: 1px solid rgb(166, 165, 165);
+}
