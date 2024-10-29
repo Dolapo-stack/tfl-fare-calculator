@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   padding: 15px 20px;
 }
 
@@ -120,9 +120,9 @@ input {
 .departure_dropdown {
   position: absolute;
   top: 120px;
-  right: 30px;
+  right: 28px;
   border: 1px solid black;
-  width: 328px;
+  width: 332px;
   margin: 45px 0 0;
   background-color: white;
   z-index: 100;
@@ -133,9 +133,9 @@ input {
 .destination_dropdown {
   position: absolute;
   top: 200px;
-  right: 30px;
+  right: 28px;
   border: 1px solid black;
-  width: 328px;
+  width: 332px;
   margin: 45px 0 0;
   background-color: white;
   z-index: 100;

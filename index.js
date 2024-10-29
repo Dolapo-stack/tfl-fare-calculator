@@ -145,8 +145,6 @@ const calculateBtn = async () => {
   const departureInputValue = departureInput.value;
   const destinationInputValue = destinationInput.value;
 
-  journeyContainer.style.border = "2px solid black";
-
   if (departureInputValue === "" || destinationInputValue === "") {
     alert("Fill details completely");
 
