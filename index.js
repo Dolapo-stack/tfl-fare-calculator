@@ -7,8 +7,8 @@ const departingStation = document.getElementById("departing_station");
 const arrivingStation = document.getElementById("arriving_station");
 
 const calculateFareBtn = document.getElementById("calculateBtn");
-const fareResult = document.getElementById("fare");
-const travelResult = document.querySelector(".travel_result");
+const fareDisplay = document.querySelector(".fare_display");
+
 const journeyContainer = document.querySelector(".journey_container");
 
 const errorMessage = document.querySelector(".error_message");
@@ -16,6 +16,8 @@ const errorMessage = document.querySelector(".error_message");
 const departureDropdown = document.querySelector(".departure_dropdown");
 const departureListUl = document.querySelector(".departure_dropdown ul");
 const departureListItem = document.querySelectorAll(".departure_dropdown li");
+const departureICSCodeElement = document.querySelector("#departureICSCode");
+const destinationICSCodeElement = document.querySelector("#destinationICSCode");
 
 const departure_user_query = async () => {
   departureDropdown.classList.remove("hide");
@@ -29,20 +31,22 @@ const departure_user_query = async () => {
   const params = new URLSearchParams({
     modes: queryParams.modes.join(","),
   });
+
   try {
     const response = await fetch(
       `https://api.tfl.gov.uk/StopPoint/Search/${query} ? ${params.toString()}`
     );
     const responseBody = await response.json();
-    const matches = responseBody.matches;
-    console.log(matches[1].modes);
 
+    const matches = responseBody.matches;
+    console.log(matches);
     populateDepartureDropdown(matches);
     const departureListItem = document.querySelectorAll(
       ".departure_dropdown li"
     );
     departureListItem.forEach((item) => {
       item.addEventListener("click", (e) => {
+        departureICSCodeElement.value = item.getAttribute("id");
         departureInput.value = item.innerHTML;
         departureDropdown.classList.add("hide");
       });
@@ -55,7 +59,7 @@ const departure_user_query = async () => {
 const populateDepartureDropdown = (matchesArray) => {
   departureListUl.innerHTML = " ";
   for (const match of matchesArray) {
-    const listItem = `<li>${match.name}</li>`;
+    const listItem = `<li id=${match.icsId}>${match.name}</li>`;
     departureListUl.insertAdjacentHTML("beforeEnd", listItem);
   }
 };
@@ -69,7 +73,7 @@ const destinationListUl = document.querySelector(".destination_dropdown ul");
 const populateDestinationDropdown = (matchesArray) => {
   destinationListUl.innerHTML = "";
   for (const match of matchesArray) {
-    const listItem = `<li>${match.name}</li>`;
+    const listItem = `<li id=${match.icsId}>${match.name}</li>`;
     destinationListUl.insertAdjacentHTML("beforeEnd", listItem);
   }
 };
@@ -90,16 +94,16 @@ const destination_user_query = async () => {
     );
 
     const responseBody = await response.json();
+    // console.log(responseBody);
     const matches = responseBody.matches;
-    console.log(matches[1].modes);
-    console.log(matches[1].name);
-
+    console.log(matches);
     populateDestinationDropdown(matches);
     const destinationListItem = document.querySelectorAll(
       ".destination_dropdown li"
     );
     destinationListItem.forEach((li) => {
       li.addEventListener("click", (e) => {
+        destinationICSCodeElement.value = li.getAttribute("id");
         destinationInput.value = li.innerHTML;
         destinationDropdown.classList.add("hide");
       });
@@ -128,66 +132,73 @@ const destination_toggle_clear_button = () => {
 const departure_clear_input = () => {
   departureInput.value = "";
   departure_clearBtn.style.display = "none";
+  departureDropdown.classList.add("hide");
 };
 
 const destination_clear_input = () => {
   destinationInput.value = "";
   destination_clearBtn.style.display = "none";
+  destinationDropdown.classList.add("hide");
 };
 
 const calculateBtn = async () => {
   const departureInputValue = departureInput.value;
   const destinationInputValue = destinationInput.value;
 
-  departingStation.textContent = departureInputValue;
-  arrivingStation.textContent = destinationInputValue;
-  travelResult.classList.remove("hide");
   journeyContainer.style.border = "2px solid black";
 
   if (departureInputValue === "" || destinationInputValue === "") {
     alert("Fill details completely");
-    travelResult.classList.add("hide");
+
     journeyContainer.style.border = "none";
   } else {
     try {
       journeyContainer.innerHTML = "LOADING!!!";
       const response = await fetch(
-        `https://api.tfl.gov.uk/Journey/JourneyResults/${departureInputValue}/to/${destinationInputValue}`
+        `https://api.tfl.gov.uk/Journey/JourneyResults/${departureICSCodeElement.value}/to/${destinationICSCodeElement.value}`
       );
       const responseBody = await response.json();
-      console.log(responseBody);
-      console.log(responseBody.journeys);
 
+      console.log(responseBody);
       journeyContainer.innerHTML = "";
 
       for (const journey of responseBody.journeys) {
-        let journeys = `<div class="journey">
-        <li class="departure_arrival_time"></li>
-        <li class="journey_duration">${journey.duration}</li>
-        <li class="platform"></li>
-      </div>`;
-        //   console.log(`Arrival Time: ${journey.arrivalDateTime}`);
+        let journeys;
 
-        //   console.log(`Duration: ${journey.duration} minutes`);
-        //   console.log(`Start Time: ${journey.startDateTime}`);
         for (const leg of journey.legs) {
-          journeys = `<div class="journey">
-        <li class="departure_arrival_time">${leg.departureTime.slice(
+          for (const routeOption of leg.routeOptions) {
+            if (
+              leg.mode.name !== "tube" &&
+              leg.mode.name !== "overground" &&
+              leg.mode.name !== "elizabeth-line" &&
+              leg.mode.name !== "national-rail" &&
+              leg.mode.name !== "dlr"
+            ) {
+              // console.log(leg);
+              continue;
+            }
+
+            journeys = `<div class="journey">
+          <li class="route">${routeOption.directions}</li>
+          <li class="route">${routeOption.name}</li>
+          
+        <li class="departure_arrival_time">${leg.scheduledDepartureTime.slice(
           11,
           16
-        )} - ${leg.arrivalTime.slice(11, 16)}</li>
+        )} - ${leg.scheduledArrivalTime.slice(11, 16)}</li>
         <li class="journey_duration">${journey.duration} mins</li>
+        <li class="fare"></li>
         <li class="platform"></li> </div>`;
-          // console.log(leg.departurePoint.commonName);
-          // console.log(leg.arrivalPoint.commonName);
-          for (const stopPoint of leg.path.stopPoints) {
-            console.log(
-              `Stop Point: ${stopPoint.name} - Arrival Time: ${journey.arrivalDateTime} , Duration: ${journey.duration} minutes , Start Time: ${journey.startDateTime}`
-            );
-          }
-        }
 
-        journeyContainer.insertAdjacentHTML("beforeend", journeys);
+            for (const stopPoint of leg.path.stopPoints) {
+              // console.log(
+              // `Stop Point: ${stopPoint.name} - Arrival Time: ${journey.arrivalDateTime} , Duration: ${journey.duration} minutes , Start Time: ${journey.startDateTime}`
+              // );
+            }
+          }
+
+          journeyContainer.insertAdjacentHTML("beforeend", journeys);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -205,7 +216,7 @@ const toggleStations = () => {
   destinationInput.value = departureInputValue;
 };
 
-travelResult.addEventListener("click", (e) => {
-  journeyContainer.classList.remove("hide");
-  journeyContainer.style.border = "2px solid black";
-});
+// travelResult.addEventListener("click", (e) => {
+//   journeyContainer.classList.remove("hide");
+//   journeyContainer.style.border = "2px solid black";
+// });

@@ -12,6 +12,7 @@
     ></script>
   </head>
   <body>
+    <h2 style="text-align: center;">TFL CALCULATOR</h1>
     <div class="container">
       <div class="input-container">
         <label>Start </label>
@@ -23,6 +24,7 @@
           oninput="departure_toggle_clear_button()"
           onkeyup="departure_user_query()"
         />
+        <input type="hidden" id="departureICSCode" />
         <span class="departure_clearBtn"
           ><i
             class="fa-solid fa-xmark fa-lg"
@@ -48,6 +50,7 @@
           onkeyup="destination_user_query()"
           oninput="destination_toggle_clear_button()"
         />
+        <input type="hidden" id="destinationICSCode" />
         <span class="destination_clearBtn"
           ><i
             class="fa-solid fa-xmark fa-lg"
@@ -59,19 +62,10 @@
         <ul></ul>
       </div>
 
+      <!-- <div class="btn">
+        <button onclick="calculateBtn()" id="submit_btn">Submit</button>
+      </div> -->
       <button onclick="calculateBtn()" id="submit_btn">Submit</button>
-    </div>
-
-    <div class="travel_result hide">
-      <div class="to_fro_display">
-        <ul class="journey_details_list">
-          <li id="departing_station"></li>
-          <li><i class="fa-solid fa-arrow-right"></i></li>
-          <li id="arriving_station"></li>
-        </ul>
-      </div>
-      <div class="fare_display">£3.90</div>
-      <div class="duration">15 mins</div>
     </div>
 
     <div class="journey_container hide"></div>
