@@ -30,6 +30,10 @@ label {
   font-weight: 600;
 }
 
+#destination {
+  margin-left: 20px;
+}
+
 input {
   border: none;
   outline: none;
@@ -63,10 +67,10 @@ input {
 
 #toggle_button {
   float: right;
-  background-color: rgb(90, 71, 47);
+  background-color: rgb(78, 74, 74);
   color: antiquewhite;
   border: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -100,7 +104,6 @@ input {
 }
 
 .journey_container {
-  /* border: 2px solid black; */
   padding: 15px 12px;
   display: flex;
   flex-direction: column;
@@ -121,7 +124,6 @@ input {
   position: absolute;
   top: 120px;
   right: 28px;
-  border: 1px solid black;
   width: 332px;
   margin: 45px 0 0;
   background-color: white;
@@ -134,7 +136,6 @@ input {
   position: absolute;
   top: 200px;
   right: 28px;
-  border: 1px solid black;
   width: 332px;
   margin: 45px 0 0;
   background-color: white;
@@ -154,4 +155,78 @@ input {
 .destination_dropdown li {
   border-bottom: 1px solid rgb(166, 165, 165);
   cursor: pointer;
+}
+
+/* DESIGN FOR LARGER SCREEN SIZES */
+@media (min-width: 600px) {
+  body {
+    align-items: center;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+  .input-container {
+    width: 720px;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+  }
+
+  #submit_btn_large {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: rgb(90, 71, 47);
+    color: antiquewhite;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    min-height: 30px;
+    width: 200px;
+    cursor: pointer;
+  }
+
+  #submit_btn_large:hover {
+    background-color: rgb(78, 74, 74);
+  }
+
+  #submit_btn {
+    display: none;
+  }
+
+  .journey_container {
+    margin-top: 5px;
+  }
+
+  .journey {
+    width: 700px;
+    font-size: 20px;
+  }
+
+  label {
+    font-size: 24px;
+  }
+
+  input {
+    font-size: 20px;
+    width: 600px;
+  }
+
+  .departure_dropdown {
+    top: 142px;
+    right: 350px;
+    width: 742px;
+  }
+
+  .destination_dropdown {
+    top: 225px;
+    right: 348px;
+    width: 743px;
+  }
+}
+
+@media (min-width: 1024px) {
 }
