@@ -8,7 +8,7 @@ body {
 
 .container {
   /* border: 2px solid black; */
-  padding: 15px 20px;
+  padding: 15px 15px;
 }
 
 .input-container {
@@ -113,7 +113,7 @@ input {
 
 .journey {
   border: 1px solid black;
-  padding: 15px 20px;
+  padding: 12px 15px;
   display: flex;
 
   gap: 20px;
@@ -167,7 +167,7 @@ input {
     font-size: 32px;
   }
   .input-container {
-    width: 720px;
+    width: 770px;
   }
 
   .btn {
@@ -202,7 +202,7 @@ input {
   }
 
   .journey {
-    width: 700px;
+    width: 750px;
     font-size: 20px;
   }
 
