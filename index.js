@@ -176,6 +176,11 @@ const calculateBtn = async () => {
               continue;
             }
 
+            const fareLabel =
+              journey.fare === undefined
+                ? ""
+                : `£ ${(journey.fare.totalCost / 100).toFixed(2)}`;
+
             journeys = `<div class="journey">
           <li class="route">${routeOption.directions}</li>
           <li class="route">${routeOption.name}</li>
@@ -185,7 +190,7 @@ const calculateBtn = async () => {
           16
         )} - ${leg.scheduledArrivalTime.slice(11, 16)}</li>
         <li class="journey_duration">${journey.duration} mins</li>
-        <li class="fare">£${(journey.fare.totalCost / 100).toFixed(2)}</li>
+        <li class="fare">${fareLabel}</li>
         <li class="platform"></li> </div>`;
 
             for (const stopPoint of leg.path.stopPoints) {
