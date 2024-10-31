@@ -7,7 +7,6 @@ body {
 }
 
 .container {
-  /* border: 2px solid black; */
   padding: 15px 15px;
 }
 
@@ -114,6 +113,9 @@ input {
 .journey {
   border: 1px solid black;
   padding: 12px 15px;
+}
+
+.journey_summary {
   display: flex;
 
   gap: 20px;
@@ -125,7 +127,7 @@ input {
   top: 120px;
   right: 28px;
   width: 332px;
-  margin: 45px 0 0;
+  margin: 36px 0 0;
   background-color: white;
   z-index: 100;
   max-height: 50vh;
@@ -137,7 +139,7 @@ input {
   top: 200px;
   right: 28px;
   width: 332px;
-  margin: 45px 0 0;
+  margin: 36px 0 0;
   background-color: white;
   z-index: 100;
   max-height: 50vh;
@@ -155,6 +157,12 @@ input {
 .destination_dropdown li {
   border-bottom: 1px solid rgb(166, 165, 165);
   cursor: pointer;
+}
+
+.summary {
+  display: flex;
+  gap: 150px;
+  list-style: none;
 }
 
 /* DESIGN FOR LARGER SCREEN SIZES */
@@ -217,14 +225,14 @@ input {
 
   .departure_dropdown {
     top: 142px;
-    right: 350px;
-    width: 742px;
+    right: 542px;
+    width: 791px;
   }
 
   .destination_dropdown {
     top: 225px;
-    right: 348px;
-    width: 743px;
+    right: 542px;
+    width: 791px;
   }
 }
 

@@ -160,55 +160,84 @@ const calculateBtn = async () => {
       console.log(responseBody);
       journeyContainer.innerHTML = "";
 
+      let journeys = "";
       for (const journey of responseBody.journeys) {
-        let journeys;
+        let legStrings = "";
+        const fareString =
+          journey.fare === undefined
+            ? "-"
+            : `£ ${(journey.fare.totalCost / 100).toFixed(2)}`;
 
         for (const leg of journey.legs) {
-          for (const routeOption of leg.routeOptions) {
-            if (
-              leg.mode.name !== "tube" &&
-              leg.mode.name !== "overground" &&
-              leg.mode.name !== "elizabeth-line" &&
-              leg.mode.name !== "national-rail" &&
-              leg.mode.name !== "dlr"
-            ) {
-              // console.log(leg);
-              continue;
-            }
-
-            const fareLabel =
-              journey.fare === undefined
-                ? ""
-                : `£ ${(journey.fare.totalCost / 100).toFixed(2)}`;
-
-            journeys = `<div class="journey">
-          <li class="route">${routeOption.directions}</li>
-          <li class="route">${routeOption.name}</li>
-          
-        <li class="departure_arrival_time">${leg.scheduledDepartureTime.slice(
-          11,
-          16
-        )} - ${leg.scheduledArrivalTime.slice(11, 16)}</li>
-        <li class="journey_duration">${journey.duration} mins</li>
-        <li class="fare">${fareLabel}</li>
-        <li class="platform"></li> </div>`;
-
-            for (const stopPoint of leg.path.stopPoints) {
-              // console.log(
-              // `Stop Point: ${stopPoint.name} - Arrival Time: ${journey.arrivalDateTime} , Duration: ${journey.duration} minutes , Start Time: ${journey.startDateTime}`
-              // );
-            }
+          if (
+            leg.mode.name !== "tube" &&
+            leg.mode.name !== "overground" &&
+            leg.mode.name !== "elizabeth-line" &&
+            leg.mode.name !== "national-rail" &&
+            leg.mode.name !== "dlr"
+          ) {
+            ("-");
           }
 
-          journeyContainer.insertAdjacentHTML("beforeend", journeys);
+          let routeOptionStrings = "";
+          for (const routeOption of leg.routeOptions) {
+            let routeOptionString = `<li class="route">${routeOption.name}</li><li class="route">${routeOption.directions}</li>`;
+            routeOptionStrings += `${routeOptionString}`;
+          }
+
+          let stopPointStrings = "";
+
+          for (const stopPoint of leg.path.stopPoints) {
+            let stopPointString = `<div class="stopPoint">${stopPoint.name}</div>`;
+            stopPointStrings += ` ${stopPointString}`;
+          }
+
+          let legString = `<div class="journey_legs"> 
+                          <div class="journey_summary">
+                              <li class="departure_point_common_name">${
+                                leg.departurePoint.commonName
+                              }</li>
+                            -
+                              <li class="arrival_point_common_name">${
+                                leg.arrivalPoint.commonName
+                              }</li>
+                              
+                          
+                              <li class="departure_arrival_time">${leg.scheduledDepartureTime.slice(
+                                11,
+                                16
+                              )} - ${leg.scheduledArrivalTime.slice(11, 16)}
+                              </li>
+                              ${routeOptionStrings}
+                              
+                             
+                             
+                          </div>
+                          <div class="journey_stopPoints">${stopPointStrings}</div>
+                       
+                        </div>`;
+          legStrings += `${legString}`;
         }
+
+        journeys = `<div class="journey">
+                      <div class="summary"> <li>${journey.startDateTime.slice(
+                        11,
+                        16
+                      )} - ${journey.arrivalDateTime.slice(
+          11,
+          16
+        )}</li><li class="journey_duration">${
+          journey.duration
+        } mins</li> <li class="fare">${fareString}</li></div>
+                      ${legStrings}
+                    </div>`;
+
+        journeyContainer.insertAdjacentHTML("beforeend", journeys);
       }
     } catch (err) {
       console.error(err);
     }
   }
-
-  //   fareResult.textContent += " 3.90";
 };
 
 const toggleStations = () => {
@@ -218,8 +247,3 @@ const toggleStations = () => {
   departureInput.value = destinationInputValue;
   destinationInput.value = departureInputValue;
 };
-
-// travelResult.addEventListener("click", (e) => {
-//   journeyContainer.classList.remove("hide");
-//   journeyContainer.style.border = "2px solid black";
-// });
