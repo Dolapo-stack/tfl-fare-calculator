@@ -176,7 +176,7 @@ const calculateBtn = async () => {
             leg.mode.name !== "national-rail" &&
             leg.mode.name !== "dlr"
           ) {
-            ("-");
+            continue;
           }
 
           let routeOptionStrings = "";
@@ -240,6 +240,21 @@ const calculateBtn = async () => {
   }
 };
 
+// fa -
+//   arrow -
+//   down.addEventListener("click", (e) => {
+//     journey_summary.classList.remove("hide");
+//   });
+
+const unCollapseLegsBtn = () => {
+  // let journey_legs = document.querySelector(".journey_legs");
+  // journey_legs.classList.remove("hide");
+};
+
+const collapseLegsBtn = () => {
+  console.log("not okay");
+};
+
 const toggleStations = () => {
   let departureInputValue = departureInput.value;
   let destinationInputValue = destinationInput.value;
@@ -247,3 +262,5 @@ const toggleStations = () => {
   departureInput.value = destinationInputValue;
   destinationInput.value = departureInputValue;
 };
+
+// <i class="fa-solid fa-arrow-down hide"></i><i class="fa-solid fa-arrow-up hide" onclick="collapseLegsBtn()"></i>
